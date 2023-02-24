@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-6&%#4+)q$fx69p7)59pw)&c)_sy_^#qql2q&f&4r-jc6fp9pom
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.railway.app']
 
 API_KEY = "?access_key=d68c15028f6da078f88b480867db0c80"
 
@@ -85,14 +85,14 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':'exmoneydb',
-#         'USER' : 'root',
-#         'PASSWORD' : '',
-#         'HOSTR':'127.0.0.1',
-#         'PORT' : 3306,
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST': os.environ.get('DB_HOST'),
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
 #     }
 # }
+
 
 
 # Password validation
