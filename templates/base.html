@@ -9,9 +9,9 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Create favicon -->
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/img/logo/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/logo/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/logo/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/logo/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/logo/favicon-16x16.png' %}">
 
     <!-- Place favicon.ico in the root directory -->
 
@@ -56,20 +56,27 @@
                   class="collapse navbar-collapse sub-menu-bar"
                   id="navbarSupportedContent"
                 >
-                  <ul id="nav" class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                <ul id="nav" class="navbar-nav ms-auto navbar-expand-lg">
+                  {% if request.resolver_match.url_name == 'home' %}
+                  <li class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inicio</a>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#calculadora">Calculadora</a>
+                          <a class="dropdown-item" href="#feature">Ventajas</a>
+                          <a class="dropdown-item" href="#last-news">Noticias</a>
+                          <a class="dropdown-item" href="#faq">FAQ</a>
+                      </div>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
                       <a href="{% url 'home' %}">Inicio</a>
-                    </li>
+                  </li>
+                  {% endif %}
                     
                     <li class="nav-item">
                       <a href="{% url 'list' %}" class="Currency">Divisas</a>
                     </li>
-                    <li class="nav-item">
-  
-                      <!-- ? En esta parte necesitamos que valide si estamos en home o no, en caso de que si funciona como una # normal, pero en caso de que no necesitamos volver a home -->
-                      
-                      <a href="#calculator">Calculadora</a>
-                    </li>
+
 
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -84,7 +91,7 @@
                       <a href="{% url 'logout' %}">Cerrar Sesión</a>
                     </li>
 
-                    <li class="">
+                    <li class="nav-item">
                       <a class="greats">Bienvenido {{ request.user.username }}</a>                    
                     </li>
 
