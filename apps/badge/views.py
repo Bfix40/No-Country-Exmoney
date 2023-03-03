@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
+from exmoney.settings import API_KEY
 import aiohttp
-import asyncio
+
 
 async def list(request):
     async with aiohttp.ClientSession() as session1:
-       async with session1.get('http://api.coinlayer.com/list?access_key=450eabae533ad6dda52c606e6526c3f7', ) as respo1:
+       async with session1.get('http://api.coinlayer.com/list'+API_KEY, ) as respo1:
                     if respo1.status  == 200:
                         data = await respo1.json()
                         b = data['crypto']  
@@ -14,7 +14,7 @@ async def list(request):
 
 async def expand(request):
     async with aiohttp.ClientSession() as session2:
-        async with session2.get('http://api.coinlayer.com/live?access_key=450eabae533ad6dda52c606e6526c3f7&expand=1', ) as resp2:
+        async with session2.get('http://api.coinlayer.com/live'+API_KEY+'&expand=1', ) as resp2:
                     if resp2.status  == 200:
                         data = await resp2.json()
                         c = data['rates']
